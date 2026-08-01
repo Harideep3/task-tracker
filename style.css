@@ -1,0 +1,322 @@
+/* ===========================================================
+   Ledger — design tokens
+   Palette:
+     --paper    #F7F5EF  warm background, like notebook paper
+     --surface  #FFFFFF  card surfaces
+     --ink      #1F2A24  near-black green-tinted text
+     --pine     #2F6F5E  primary accent (buttons, active states)
+     --clay     #C9683D  warm accent (high priority / overdue)
+     --sage     #8B9A93  muted text / borders
+     --line     #E4E0D6  hairline dividers
+   Type:
+     Display -> "Fraunces" (characterful serif, headings only)
+     Body    -> "Inter"
+     Data    -> "IBM Plex Mono" (dates, counters — feels ledger-like)
+   =========================================================== */
+
+:root {
+  --paper: #F7F5EF;
+  --surface: #FFFFFF;
+  --ink: #1F2A24;
+  --pine: #2F6F5E;
+  --pine-dark: #234f42;
+  --clay: #C9683D;
+  --sage: #8B9A93;
+  --line: #E4E0D6;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+}
+
+h1, h2 {
+  font-family: 'Fraunces', serif;
+  margin: 0;
+}
+
+button, input, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ===== Layout ===== */
+
+.app {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 100vh;
+}
+
+@media (max-width: 720px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar { border-right: none; border-bottom: 1px solid var(--line); }
+}
+
+/* ===== Sidebar ===== */
+
+.sidebar {
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+  padding: 28px 22px;
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.brand-mark {
+  color: var(--pine);
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+}
+
+.brand h1 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.brand-sub {
+  margin: 2px 0 28px;
+  color: var(--sage);
+  font-size: 13px;
+}
+
+.nav-label {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+  color: var(--sage);
+  margin: 22px 0 8px;
+}
+
+.filter-btn, .cat-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 10px;
+  margin-bottom: 2px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.filter-btn:hover, .cat-btn:hover { background: var(--paper); }
+
+.filter-btn.active, .cat-btn.active {
+  background: var(--pine);
+  color: white;
+}
+
+.stats canvas {
+  width: 100%;
+  height: auto;
+  margin-top: 4px;
+}
+
+/* ===== Main ===== */
+
+.main {
+  padding: 32px 40px 60px;
+  max-width: 760px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 22px;
+}
+
+.tally {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  color: var(--sage);
+}
+
+.tally span { color: var(--ink); font-weight: 500; }
+
+.today {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  color: var(--sage);
+}
+
+/* ===== Form ===== */
+
+.task-form {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 18px;
+}
+
+.task-form input[type="text"] {
+  flex: 1 1 200px;
+  border: none;
+  padding: 8px 4px;
+  outline: none;
+  font-size: 15px;
+}
+
+.task-form select,
+.task-form input[type="date"] {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 7px 8px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.add-btn {
+  background: var(--pine);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.15s ease;
+}
+
+.add-btn:hover { background: var(--pine-dark); }
+
+/* ===== Sort row ===== */
+
+.sort-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--sage);
+  margin-bottom: 10px;
+}
+
+.sort-row select {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 4px 6px;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+/* ===== Task list ===== */
+
+.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.task-item {
+  display: grid;
+  grid-template-columns: 24px 1fr auto auto;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--sage);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+}
+
+.task-item.priority-high { border-left-color: var(--clay); }
+.task-item.priority-medium { border-left-color: var(--pine); }
+.task-item.priority-low { border-left-color: var(--sage); }
+
+.task-item.completed {
+  opacity: 0.5;
+}
+
+.task-item.completed .task-title {
+  text-decoration: line-through;
+}
+
+.task-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--pine);
+  cursor: pointer;
+  background: none;
+  position: relative;
+}
+
+.task-check.checked {
+  background: var(--pine);
+}
+
+.task-check.checked::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.task-main { min-width: 0; }
+
+.task-title {
+  font-weight: 500;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.task-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--sage);
+  margin-top: 2px;
+}
+
+.task-cat {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: var(--paper);
+  color: var(--sage);
+  white-space: nowrap;
+}
+
+.task-delete {
+  background: none;
+  border: none;
+  color: var(--sage);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 4px;
+}
+
+.task-delete:hover { color: var(--clay); }
+
+.empty-state {
+  display: none;
+  text-align: center;
+  color: var(--sage);
+  padding: 30px 0;
+}
+
+.empty-state.visible { display: block; }
