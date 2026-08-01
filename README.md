@@ -2,7 +2,6 @@
 
 A small, dependency-free task tracker built with plain HTML, CSS, and JavaScript. No frameworks, no build step — open `index.html` and it runs.
 
-**[Live demo](#)** — *(add your deployed link here after you publish it — see "Deploying" below)*
 
 ## Why I built this
 
@@ -46,23 +45,4 @@ task-tracker/
 └── README.md
 ```
 
-## Deploying
 
-This is a static site, so it deploys for free on:
-- **[Vercel](https://vercel.com)** — drag the folder into the dashboard, or connect the GitHub repo
-- **[Netlify](https://netlify.com)** — same, drag-and-drop or connect to GitHub
-- **GitHub Pages** — enable it in the repo's Settings → Pages, pointing at the `main` branch
-
-Once deployed, update the "Live demo" link above.
-
-## Ideas for extending it
-
-- Swap `localStorage` for a real backend (Firebase or a small Node/Express API) so data syncs across devices
-- Add drag-and-drop reordering
-- Add recurring tasks
-- Add tests (this project currently has none — a good next step to learn testing fundamentals)
-
-## What I'd highlight in an interview
-
-- State lives in one array (`tasks`) and everything else — filtering, sorting, the chart — is derived from it on each render. That single-source-of-truth pattern is the same idea behind state management in larger frameworks like React.
-- The chart is drawn manually with the Canvas API instead of a library, to understand how basic data viz actually works under the hood.
